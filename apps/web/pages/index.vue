@@ -7,7 +7,7 @@
       :block="currentBlock"
       @update="updateBlock"
     />
-    <div v-else class="content">
+    <div v-else class="content DINGSBUMS">
       <template v-for="(block, index) in data.blocks" :key="index">
         <PageBlock
           :index="index"
