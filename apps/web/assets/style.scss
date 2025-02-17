@@ -24,6 +24,10 @@
   --colors-2-secondary-900: #{$color-2-secondary-900};
 }
 
+body {
+  color: $default-text-color;
+}
+
 .scrollbar-hidden {
   -ms-overflow-style: none;
   scrollbar-width: none;
