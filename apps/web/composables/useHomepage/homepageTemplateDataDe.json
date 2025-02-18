@@ -9,52 +9,56 @@
               "color": "#fff"
             },
             "image": {
-              "desktop": "https://cdn02.plentymarkets.com/mevofvd5omld/frontend/Test_Banner_Person/guy-1024.avif",
-              "tablet": "https://cdn02.plentymarkets.com/mevofvd5omld/frontend/Test_Banner_Person/guy-768.avif",
-              "mobile": "https://cdn02.plentymarkets.com/mevofvd5omld/frontend/Test_Banner_Person/guy-320.avif",
+              "desktop": "https://cdn10.plentymarkets.com/mrt54q44tptl/frontend/startseite/2025/Startseite_1_Schlafzimmer_02-25_Web.webp",
+              "tablet": "https://cdn10.plentymarkets.com/mrt54q44tptl/frontend/startseite/2025/Startseite_1_Schlafzimmer_02-25_Mobile.webp",
+              "mobile": "https://cdn10.plentymarkets.com/mrt54q44tptl/frontend/startseite/2025/Startseite_1_Schlafzimmer_02-25_Mobile.webp",
               "alt": "",
-              "brightness": 0.5
+              "brightness": 0.9
             },
             "text": {
               "color": "#000",
               "bgcolor": "#fff",
-              "bgopacity": 0.9,
-              "pretitle": "Kristalklare Klänge Genießen",
-              "title": "Ihr Sound",
-              "subtitle": "Auf höchstem Niveau",
-              "htmlDescription": "Unsere hochmodernen Kopfhörer: Entwickelt für das ultimative Hörerlebnis genügen sie auch den höchsten Ansprüchen. Entdecken Sie die perfekte Mischung aus Stil, Komfort und Klangqualität, die Ihren Musikgenuss auf ein völlig neues Niveau hebt.",
+              "bgopacity": 0.8,
+              "pretitle": "Wo Träume wahr werden",
+              "title": "Alles rund ums Schlafzimmer zum Tiefstpreis!",
+              "subtitle": "",
+              "htmlDescription": "",
               "textAlignment": "left",
               "justify": "top",
-              "align": "start"
+              "align": "end"
             },
             "button": {
-              "label": "Capybara entdecken",
+              "label": "Jetzt entdecken",
               "link": "/gear/headphones-capybara_157",
               "variant": "primary"
             }
           },
           {
+            "controls": {
+              "color": "#fff"
+            },
             "image": {
-              "desktop": "https://cdn02.plentymarkets.com/mevofvd5omld/frontend/Test_Banner_Drone/drone-A-1024.avif",
-              "tablet": "https://cdn02.plentymarkets.com/mevofvd5omld/frontend/Test_Banner_Drone/drone-A-768.avif",
-              "mobile": "https://cdn02.plentymarkets.com/mevofvd5omld/frontend/Test_Banner_Drone/drone-A-320.avif",
+              "desktop": "https://cdn10.plentymarkets.com/mrt54q44tptl/frontend/startseite/2025/Startseite_5_Esszimmer_02-25_Web.webp",
+              "tablet": "https://cdn10.plentymarkets.com/mrt54q44tptl/frontend/startseite/2025/Startseite_5_Esszimmer_02-25_Mobile_neu.webp",
+              "mobile": "https://cdn10.plentymarkets.com/mrt54q44tptl/frontend/startseite/2025/Startseite_5_Esszimmer_02-25_Mobile_neu.webp",
               "alt": "",
-              "brightness": 0.75
+              "brightness": 0.9
             },
             "text": {
               "color": "#000",
               "bgcolor": "#fff",
-              "bgopacity": 1,
-              "pretitle": "Die Zukunft der Luftbildfotografie",
-              "title": "Drone Omega",
-              "htmlDescription": "Omega ist eine leichte Drohne, die für atemberaubende Luftaufnahmen entwickelt wurde. Mit einer hochauflösenden Kamera auf einem 3-Achsen-Gimbal und einer Flugzeit von bis zu 45 Minuten sorgt sie für stabile, flüssige Videos. GPS-unterstützter Schwebeflug, Hindernisvermeidung und einfache Transportfähigkeit machen die Drone zum perfekten Begleiter für Ihre Aufnahmen.",
+              "bgopacity": 0.8,
+              "pretitle": "Ganz nach deinem Geschmack",
+              "title": "Stilvolle und funktionale Esstische bereits ab CHF 74.90!",
+              "subtitle": "",
+              "htmlDescription": "",
               "textAlignment": "left",
               "justify": "top",
-              "align": "start"
+              "align": "end"
             },
             "button": {
-              "label": "Omega entdecken",
-              "link": "/gear/drone-omega_154",
+              "label": "Jetzt entdecken",
+              "link": "/gear/headphones-capybara_157",
               "variant": "primary"
             }
           }
@@ -107,25 +111,51 @@
         }
       }
     },
-
     {
-      "name": "UiImageText-2-1",
+      "name": "UiImageText21",
       "options": {
         "text": {
-          "htmlDescription": "<p>Unsere Kopfhörer-Kollektion setzt neue Maßstäbe in Sachen Audio-Präzision. Mit tiefem Bass, klaren Höhen und einem eindrucksvollen Klangbild bieten diese Kopfhörer ein einzigartiges Hörerlebnis für jedes Musikgenre. Mit einer Kombination aus modernem Design, höchstem Komfort und neuester Technologie sind sie die perfekte Wahl für alle, die keine Kompromisse bei der Klangqualität eingehen möchten.</p><ul class='list-disc pl-4 mt-4 space-y-1'><li>Premium-Sound in Studioqualität</li><li>Elegant und formschön</li><li>Lange Akkulaufzeit</li><li>Kabellose Verbindung via Bluetooth</li></ul>",
-          "title": "Entdecken Sie Technik und Stil",
-          "subtitle": "Innovative Technologie trifft moderne Fashion",
-          "textAlignment": "left"
+          "htmlDescription": "",
+          "pretitle": "Wo Träume wahr werden",
+          "title": "Alles rund ums Schlafzimmer zum Tiefstpreis!",
+          "subtitle": "",
+          "textAlignment": "left",
+          "bgcolor": "#f5f5f5"
         },
         "button": {
-          "label": "Zu unseren Kopfhörern",
+          "label": "Jetzt entdecken",
           "link": "/technik/headphones-capybara_157",
           "variant": "primary"
         },
         "image": {
-          "desktop": "https://cdn02.plentymarkets.com/mevofvd5omld/frontend/headphones-mediacard.avif",
-          "tablet": "https://cdn02.plentymarkets.com/mevofvd5omld/frontend/headphones-mediacard.avif",
-          "mobile": "https://cdn02.plentymarkets.com/mevofvd5omld/frontend/headphones-mediacard.avif",
+          "desktop": "https://cdn10.plentymarkets.com/mrt54q44tptl/frontend/startseite/2025/Startseite_1_Schlafzimmer_02-25_Web.webp",
+          "tablet": "https://cdn10.plentymarkets.com/mrt54q44tptl/frontend/startseite/2025/Startseite_1_Schlafzimmer_02-25_Mobile.webp",
+          "mobile": "https://cdn10.plentymarkets.com/mrt54q44tptl/frontend/startseite/2025/Startseite_1_Schlafzimmer_02-25_Mobile.webp",
+          "alt": "Headphones",
+          "imageAlignment": "left"
+        }
+      }
+    },
+    {
+      "name": "UiImageText12",
+      "options": {
+        "text": {
+          "htmlDescription": "",
+          "pretitle": "Ganz nach deinem Geschmack",
+          "title": "Stilvolle und funktionale Esstische bereits ab CHF 74.90!",
+          "subtitle": "",
+          "textAlignment": "left",
+          "bgcolor": "#f5f5f5"
+        },
+        "button": {
+          "label": "Jetzt entdecken",
+          "link": "/technik/headphones-capybara_157",
+          "variant": "primary"
+        },
+        "image": {
+          "desktop": "https://cdn10.plentymarkets.com/mrt54q44tptl/frontend/startseite/2025/Startseite_5_Esszimmer_02-25_Web.webp",
+          "tablet": "https://cdn10.plentymarkets.com/mrt54q44tptl/frontend/startseite/2025/Startseite_5_Esszimmer_02-25_Mobile_neu.webp",
+          "mobile": "https://cdn10.plentymarkets.com/mrt54q44tptl/frontend/startseite/2025/Startseite_5_Esszimmer_02-25_Mobile_neu.webp",
           "alt": "Headphones",
           "imageAlignment": "left"
         }
@@ -147,7 +177,7 @@
       "name": "NewsletterSubscribe",
       "options": {
         "text": {
-          "bgColor": "#f5f5f5",
+          "bgcolor": "#f5f5f5",
           "title": "Abonnieren Sie unseren Newsletter",
           "htmlDescription": "Informieren Sie sich über bevorstehende Aktionen und Veranstaltungen. Erhalten Sie Geschenke und Sonderangebote!"
         },

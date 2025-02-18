@@ -96,6 +96,8 @@ const getComponent = (name: string) => {
   if (name === 'NewsletterSubscribe') return resolveComponent('NewsletterSubscribe');
   if (name === 'UiTextCard') return resolveComponent('UiTextCard');
   if (name === 'UiImageText') return resolveComponent('UiImageText');
+  if (name === 'UiImageText12') return resolveComponent('UiImageText12');
+  if (name === 'UiImageText21') return resolveComponent('UiImageText21');
   if (name === 'ProductRecommendedProducts') return resolveComponent('ProductRecommendedProducts');
   if (name === 'UiCarousel') {
     return isHero.value ? resolveComponent('UiHeroCarousel') : resolveComponent('UiBlazeCarousel');
