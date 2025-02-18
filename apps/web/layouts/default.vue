@@ -7,7 +7,7 @@
     <main>
       <slot />
     </main>
-    <UiNavbarBottom v-if="viewport.isLessThan('lg')" />
+    <!-- <UiNavbarBottom v-if="viewport.isLessThan('lg')" /> -->
     <Cookiebar />
     <PreviewMode />
     <NuxtLazyHydrate when-visible>
@@ -23,6 +23,6 @@ import type { DefaultLayoutProps } from '~/layouts/types';
 defineProps<DefaultLayoutProps>();
 const { setLogoMeta } = useStructuredData();
 const { isOpen, product } = useQuickCheckout();
-const viewport = useViewport();
+// const viewport = useViewport();
 setLogoMeta();
 </script>

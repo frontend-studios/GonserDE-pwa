@@ -5,7 +5,7 @@
       data-testid="navbar-top"
     >
       <div class="flex items-center">
-        <UiButton
+        <!-- <UiButton
           v-if="viewport.isLessThan('lg')"
           variant="tertiary"
           square
@@ -13,8 +13,8 @@
           class="mr-5 bg-transparent hover:bg-primary-800 hover:text-white active:bg-primary-700 active:text-primary-500"
           @click="openMenu([])"
         >
-          <SfIconMenu class="text-white" />
-        </UiButton>
+          <SfIconMenu />
+        </UiButton> -->
 
         <NuxtLink
           :to="localePath(paths.home)"
@@ -25,7 +25,7 @@
         </NuxtLink>
       </div>
 
-      <slot />
+      <slot v-bind="{ openMenu }" />
     </div>
 
     <div v-if="viewport.isGreaterOrEquals('lg')">
@@ -124,8 +124,8 @@
       <SfDrawer
         ref="drawerReference"
         v-model="isOpen"
-        placement="left"
-        class="right-12 max-w-96 bg-white overflow-y-auto z-[1000]"
+        placement="right"
+        class="left-12 max-w-96 bg-white overflow-y-auto z-[1000]"
       >
         <nav>
           <div class="flex items-center justify-between p-4 border-b border-b-neutral-200 border-b-solid">
@@ -190,7 +190,7 @@ import {
   SfIconChevronRight,
   SfCounter,
   SfIconArrowBack,
-  SfIconMenu,
+  // SfIconMenu,
   useTrapFocus,
   useDropdown,
 } from '@storefront-ui/vue';
