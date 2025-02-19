@@ -209,6 +209,15 @@ const visibleDots = computed(() => {
   const start = Math.max(0, lightboxIndex.value - 2);
   const end = Math.min(totalDots, lightboxIndex.value + 3);
 
+  if (end - start < maxDots) {
+    if (start === 0) {
+      return Array.from({ length: maxDots }, (_, i) => i);
+    }
+    if (end === totalDots) {
+      return Array.from({ length: maxDots }, (_, i) => totalDots - maxDots + i);
+    }
+  }
+
   for (let i = start; i < end; i++) {
     dots.push(i);
   }
