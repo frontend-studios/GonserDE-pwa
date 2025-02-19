@@ -15,17 +15,7 @@
         :drag="{ containerWidth: true }"
         @on-scroll="onScroll"
       >
-        <!-- <ZoomableImage
-          v-for="(image, index) in images"
-          :key="`image-${index}-thumbnail`"
-          :images="images"
-          :image="image"
-          :index="index"
-          :active-index="activeIndex"
-          :is-first-image="index === 0"
-          @click="openLightbox(lightboxIndex)"
-        /> -->
-        <transition name="fade" mode="out-in">
+        <transition :name="transitionName" mode="out-in">
           <img
             :key="lightboxIndex"
             :src="productImageGetters.getImageUrl(images[lightboxIndex])"
@@ -38,14 +28,14 @@
       <!-- Previous and Next Buttons -->
       <button
         v-if="lightboxIndex > 0"
-        class="absolute left-2 top-1/2 transform -translate-y-1/2 text-primary-800 opacity-0 group-hover:opacity-100 transition-opacity"
+        class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black text-white opacity-0 group-hover:opacity-60 transition-opacity"
         @click="prevImage"
       >
         <SfIconChevronLeft size="2xl" />
       </button>
       <button
         v-if="lightboxIndex < images.length - 1"
-        class="absolute right-2 top-1/2 transform -translate-y-1/2 text-primary-800 opacity-0 group-hover:opacity-100 transition-opacity"
+        class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black text-white opacity-0 group-hover:opacity-60 transition-opacity"
         @click="nextImage"
       >
         <SfIconChevronRight size="2xl" />
@@ -57,7 +47,7 @@
         class="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex justify-center z-10"
       >
         <span
-          v-for="(image, index) in images"
+          v-for="(image, index) in visibleDots"
           :key="`dot-${index}`"
           class="w-3 h-3 mx-1 rounded-full cursor-pointer"
           :class="{ 'bg-primary-800': lightboxIndex === index, 'bg-primary-500': lightboxIndex !== index }"
@@ -106,7 +96,7 @@
           >
             <SfIconChevronRight size="2xl" />
           </button>
-          <transition name="fade" mode="out-in">
+          <transition :name="transitionName" mode="out-in">
             <img
               :key="lightboxIndex"
               :src="productImageGetters.getImageUrl(images[lightboxIndex])"
@@ -133,6 +123,7 @@ const { isPending, start, stop } = useTimeoutFn(() => {}, 50);
 const activeIndex = ref(0);
 const lightboxOpen = ref(false);
 const lightboxIndex = ref(0);
+const transitionName = ref('slide-left');
 
 const onChangeIndex = (index: number) => {
   stop();
@@ -156,12 +147,14 @@ const closeLightbox = () => {
 
 const prevImage = () => {
   if (lightboxIndex.value > 0) {
+    transitionName.value = 'slide-right';
     lightboxIndex.value--;
   }
 };
 
 const nextImage = () => {
   if (lightboxIndex.value < props.images.length - 1) {
+    transitionName.value = 'slide-left';
     lightboxIndex.value++;
   }
 };
@@ -186,4 +179,68 @@ const handleTouchEnd = () => {
     prevImage();
   }
 };
+
+// Computed property for visible dots
+const visibleDots = computed(() => {
+  const totalDots = props.images.length;
+  const maxDots = 5;
+  const dots = [];
+
+  if (totalDots <= maxDots) {
+    return Array.from({ length: totalDots }, (_, i) => i);
+  }
+
+  if (lightboxIndex.value === 0) {
+    return [0, 1, 2];
+  }
+
+  if (lightboxIndex.value === 1) {
+    return [0, 1, 2, 3];
+  }
+
+  if (lightboxIndex.value === totalDots - 1) {
+    return [totalDots - 3, totalDots - 2, totalDots - 1];
+  }
+
+  if (lightboxIndex.value === totalDots - 2) {
+    return [totalDots - 4, totalDots - 3, totalDots - 2, totalDots - 1];
+  }
+
+  const start = Math.max(0, lightboxIndex.value - 2);
+  const end = Math.min(totalDots, lightboxIndex.value + 3);
+
+  for (let i = start; i < end; i++) {
+    dots.push(i);
+  }
+
+  return dots;
+});
 </script>
+
+<style scoped>
+.slide-left-enter-active, .slide-left-leave-active {
+  transition: transform 300ms;
+}
+.slide-left-enter-from {
+  transform: translateX(100%);
+}
+.slide-left-leave-to {
+  transform: translateX(-100%);
+}
+.slide-left-enter-to, .slide-left-leave-from {
+  transform: translateX(0);
+}
+
+.slide-right-enter-active, .slide-right-leave-active {
+  transition: transform 300ms;
+}
+.slide-right-enter-from {
+  transform: translateX(-100%);
+}
+.slide-right-leave-to {
+  transform: translateX(100%);
+}
+.slide-right-enter-to, .slide-right-leave-from {
+  transform: translateX(0);
+}
+</style>
