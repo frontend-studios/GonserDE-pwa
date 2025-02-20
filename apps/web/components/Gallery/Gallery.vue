@@ -45,14 +45,17 @@
       <div
         v-if="images.length > 1"
         class="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex justify-center z-10"
+        style="width: calc(5 * 1.5rem); overflow: hidden;"
       >
-        <span
-          v-for="(image, index) in visibleDots"
-          :key="`dot-${index}`"
-          class="w-3 h-3 mx-1 rounded-full cursor-pointer"
-          :class="{ 'bg-primary-800': lightboxIndex === index, 'bg-primary-500': lightboxIndex !== index }"
-          @click="onChangeIndex(index)"
-        />
+        <transition-group name="dot" tag="div" class="flex">
+          <span
+            v-for="(index) in visibleDots"
+            :key="`dot-${index}`"
+            class="w-3 h-3 mx-1 rounded-full cursor-pointer dot"
+            :class="{ 'bg-primary-800': lightboxIndex === index, 'bg-primary-500': lightboxIndex !== index }"
+            @click="onChangeIndex(index)"
+          />
+        </transition-group>
       </div>
     </div>
 
@@ -251,5 +254,25 @@ const visibleDots = computed(() => {
 }
 .slide-right-enter-to, .slide-right-leave-from {
   transform: translateX(0);
+}
+
+.dot-enter-active, .dot-leave-active {
+  transition: opacity 300ms ease-in-out, transform 300ms ease-in-out;
+}
+.dot-enter-from {
+  opacity: 0;
+  transform: translateX(100%) scale(0.5);
+}
+.dot-leave-to {
+  opacity: 0;
+  transform: translateX(-100%) scale(0.5);
+}
+.dot-enter-to, .dot-leave-from {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.dot-move {
+  transition: transform 300ms;
 }
 </style>
