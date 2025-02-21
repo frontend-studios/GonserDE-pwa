@@ -231,7 +231,7 @@ const visibleDots = computed(() => {
 
 <style scoped>
 .slide-left-enter-active, .slide-left-leave-active {
-  transition: transform 300ms;
+  transition: transform 200ms;
 }
 .slide-left-enter-from {
   transform: translateX(100%);
@@ -244,7 +244,7 @@ const visibleDots = computed(() => {
 }
 
 .slide-right-enter-active, .slide-right-leave-active {
-  transition: transform 300ms;
+  transition: transform 200ms;
 }
 .slide-right-enter-from {
   transform: translateX(-100%);
@@ -257,7 +257,7 @@ const visibleDots = computed(() => {
 }
 
 .dot-enter-active, .dot-leave-active {
-  transition: opacity 300ms ease-in-out, transform 300ms ease-in-out;
+  transition: opacity 200ms ease-in-out, transform 200ms ease-in-out;
 }
 .dot-enter-from {
   opacity: 0;
