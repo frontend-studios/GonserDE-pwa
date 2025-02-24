@@ -1,68 +1,28 @@
 {
   "blocks": [
     {
-      "name": "UiCarousel",
+      "name": "UiImageText12",
       "options": {
-        "bannerItems": [
-          {
-            "controls": {
-              "color": "#fff"
-            },
-            "image": {
-              "desktop": "https://cdn10.plentymarkets.com/mrt54q44tptl/frontend/startseite/2025/Startseite_1_Schlafzimmer_02-25_Web.webp",
-              "tablet": "https://cdn10.plentymarkets.com/mrt54q44tptl/frontend/startseite/2025/Startseite_1_Schlafzimmer_02-25_Mobile.webp",
-              "mobile": "https://cdn10.plentymarkets.com/mrt54q44tptl/frontend/startseite/2025/Startseite_1_Schlafzimmer_02-25_Mobile.webp",
-              "alt": "",
-              "brightness": 0.9
-            },
-            "text": {
-              "color": "#000",
-              "bgcolor": "#fff",
-              "bgopacity": 0.8,
-              "pretitle": "Wo Träume wahr werden",
-              "title": "Alles rund ums Schlafzimmer zum Tiefstpreis!",
-              "subtitle": "",
-              "htmlDescription": "",
-              "textAlignment": "left",
-              "justify": "top",
-              "align": "end"
-            },
-            "button": {
-              "label": "Jetzt entdecken",
-              "link": "/gear/headphones-capybara_157",
-              "variant": "primary"
-            }
-          },
-          {
-            "controls": {
-              "color": "#fff"
-            },
-            "image": {
-              "desktop": "https://cdn10.plentymarkets.com/mrt54q44tptl/frontend/startseite/2025/Startseite_5_Esszimmer_02-25_Web.webp",
-              "tablet": "https://cdn10.plentymarkets.com/mrt54q44tptl/frontend/startseite/2025/Startseite_5_Esszimmer_02-25_Mobile_neu.webp",
-              "mobile": "https://cdn10.plentymarkets.com/mrt54q44tptl/frontend/startseite/2025/Startseite_5_Esszimmer_02-25_Mobile_neu.webp",
-              "alt": "",
-              "brightness": 0.9
-            },
-            "text": {
-              "color": "#000",
-              "bgcolor": "#fff",
-              "bgopacity": 0.8,
-              "pretitle": "Ganz nach deinem Geschmack",
-              "title": "Stilvolle und funktionale Esstische bereits ab CHF 74.90!",
-              "subtitle": "",
-              "htmlDescription": "",
-              "textAlignment": "left",
-              "justify": "top",
-              "align": "end"
-            },
-            "button": {
-              "label": "Jetzt entdecken",
-              "link": "/gear/headphones-capybara_157",
-              "variant": "primary"
-            }
-          }
-        ]
+        "text": {
+          "htmlDescription": "",
+          "pretitle": "Ganz nach deinem Geschmack",
+          "title": "Stilvolle und funktionale Esstische bereits ab CHF 74.90!",
+          "subtitle": "",
+          "textAlignment": "left",
+          "bgcolor": "#f5f5f5"
+        },
+        "button": {
+          "label": "Jetzt entdecken",
+          "link": "/technik/headphones-capybara_157",
+          "variant": "primary"
+        },
+        "image": {
+          "desktop": "https://cdn10.plentymarkets.com/mrt54q44tptl/frontend/startseite/2025/Startseite_5_Esszimmer_02-25_Web.webp",
+          "tablet": "https://cdn10.plentymarkets.com/mrt54q44tptl/frontend/startseite/2025/Startseite_5_Esszimmer_02-25_Mobile_neu.webp",
+          "mobile": "https://cdn10.plentymarkets.com/mrt54q44tptl/frontend/startseite/2025/Startseite_5_Esszimmer_02-25_Mobile_neu.webp",
+          "alt": "Headphones",
+          "imageAlignment": "left"
+        }
       }
     },
     {
@@ -137,31 +97,6 @@
       }
     },
     {
-      "name": "UiImageText12",
-      "options": {
-        "text": {
-          "htmlDescription": "",
-          "pretitle": "Ganz nach deinem Geschmack",
-          "title": "Stilvolle und funktionale Esstische bereits ab CHF 74.90!",
-          "subtitle": "",
-          "textAlignment": "left",
-          "bgcolor": "#f5f5f5"
-        },
-        "button": {
-          "label": "Jetzt entdecken",
-          "link": "/technik/headphones-capybara_157",
-          "variant": "primary"
-        },
-        "image": {
-          "desktop": "https://cdn10.plentymarkets.com/mrt54q44tptl/frontend/startseite/2025/Startseite_5_Esszimmer_02-25_Web.webp",
-          "tablet": "https://cdn10.plentymarkets.com/mrt54q44tptl/frontend/startseite/2025/Startseite_5_Esszimmer_02-25_Mobile_neu.webp",
-          "mobile": "https://cdn10.plentymarkets.com/mrt54q44tptl/frontend/startseite/2025/Startseite_5_Esszimmer_02-25_Mobile_neu.webp",
-          "alt": "Headphones",
-          "imageAlignment": "left"
-        }
-      }
-    },
-    {
       "name": "ProductRecommendedProducts",
       "options": {
         "text": {
@@ -188,6 +123,71 @@
         "button": {
           "label": "Newsletter abonnieren"
         }
+      }
+    },
+    {
+      "name": "UiCarousel",
+      "options": {
+        "bannerItems": [
+          {
+            "controls": {
+              "color": "#fff"
+            },
+            "image": {
+              "desktop": "https://cdn10.plentymarkets.com/mrt54q44tptl/frontend/startseite/2025/Startseite_1_Schlafzimmer_02-25_Web.webp",
+              "tablet": "https://cdn10.plentymarkets.com/mrt54q44tptl/frontend/startseite/2025/Startseite_1_Schlafzimmer_02-25_Mobile.webp",
+              "mobile": "https://cdn10.plentymarkets.com/mrt54q44tptl/frontend/startseite/2025/Startseite_1_Schlafzimmer_02-25_Mobile.webp",
+              "alt": "",
+              "brightness": 0.9
+            },
+            "text": {
+              "color": "#000",
+              "bgcolor": "#fff",
+              "bgopacity": 0.8,
+              "pretitle": "Wo Träume wahr werden",
+              "title": "Alles rund ums Schlafzimmer zum Tiefstpreis!",
+              "subtitle": "",
+              "htmlDescription": "",
+              "textAlignment": "left",
+              "justify": "top",
+              "align": "end"
+            },
+            "button": {
+              "label": "Jetzt entdecken",
+              "link": "/gear/headphones-capybara_157",
+              "variant": "primary"
+            }
+          },
+          {
+            "controls": {
+              "color": "#fff"
+            },
+            "image": {
+              "desktop": "https://cdn10.plentymarkets.com/mrt54q44tptl/frontend/startseite/2025/Startseite_5_Esszimmer_02-25_Web.webp",
+              "tablet": "https://cdn10.plentymarkets.com/mrt54q44tptl/frontend/startseite/2025/Startseite_5_Esszimmer_02-25_Mobile_neu.webp",
+              "mobile": "https://cdn10.plentymarkets.com/mrt54q44tptl/frontend/startseite/2025/Startseite_5_Esszimmer_02-25_Mobile_neu.webp",
+              "alt": "",
+              "brightness": 0.9
+            },
+            "text": {
+              "color": "#000",
+              "bgcolor": "#fff",
+              "bgopacity": 0.8,
+              "pretitle": "Ganz nach deinem Geschmack",
+              "title": "Stilvolle und funktionale Esstische bereits ab CHF 74.90!",
+              "subtitle": "",
+              "htmlDescription": "",
+              "textAlignment": "left",
+              "justify": "top",
+              "align": "end"
+            },
+            "button": {
+              "label": "Jetzt entdecken",
+              "link": "/gear/headphones-capybara_157",
+              "variant": "primary"
+            }
+          }
+        ]
       }
     }
   ],

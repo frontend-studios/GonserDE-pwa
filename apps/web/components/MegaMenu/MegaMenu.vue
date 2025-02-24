@@ -31,11 +31,11 @@
     <div v-if="viewport.isGreaterOrEquals('lg')">
       <nav ref="floatingRef">
         <ul
-          class="flex px-6 py-2 bg-white border-b border-b-neutral-200 border-b-solid"
+          class="flex px-6 py-2 bg-white border-b-2 border-b-primary-500 border-b-solid"
           @blur="
-            (event) => {
+            (event: FocusEvent) => {
               if (!(event.currentTarget as Element).contains(event.relatedTarget as Element)) {
-                close();
+              close();
               }
             }
           "
@@ -83,7 +83,7 @@
                       :tag="NuxtLink"
                       size="sm"
                       :href="localePath(generateCategoryLink(node))"
-                      class="typography-text-sm mb-2"
+                      class="typography-text-base font-medium text-primary-500 whitespace-nowrap px-4 py-1"
                     >
                       {{ categoryTreeGetters.getName(node) }}
                     </SfListItem>
