@@ -53,10 +53,10 @@
                 @click="menuNode.childCount > 0 ? openMenu([menuNode.id]) : openMenu([])"
               >
                 <span>{{ categoryTreeGetters.getName(menuNode) }}</span>
-                <SfIconChevronRight
+                <!-- <SfIconChevronRight
                   v-if="menuNode.childCount > 0"
                   class="rotate-90 text-neutral-500 group-hover:text-neutral-700 group-active:text-neutral-900"
-                />
+                /> -->
               </UiButton>
             </NuxtLink>
 
@@ -94,7 +94,7 @@
                     :tag="NuxtLink"
                     size="sm"
                     :href="localePath(generateCategoryLink(node))"
-                    class="typography-text-base font-medium text-neutral-900 whitespace-nowrap px-4 py-1.5 border-b border-b-neutral-200 border-b-solid"
+                    class="typography-text-base font-medium text-primary-500 whitespace-nowrap px-4 py-1"
                   >
                     {{ categoryTreeGetters.getName(node) }}
                   </SfListItem>
@@ -105,7 +105,7 @@
                         :tag="NuxtLink"
                         size="sm"
                         :href="localePath(generateCategoryLink(child))"
-                        class="typography-text-sm py-1.5"
+                        class="typography-text-sm py-0.5"
                       >
                         {{ categoryTreeGetters.getName(child) }}
                       </SfListItem>
