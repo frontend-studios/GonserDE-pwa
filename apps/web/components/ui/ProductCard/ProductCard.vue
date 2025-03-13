@@ -32,27 +32,27 @@
       <slot name="wishlistButton">
         <WishlistButton
           square
-          class="absolute bottom-0 right-0 mr-2 mb-2 bg-white ring-1 ring-inset ring-neutral-200 !rounded-full"
+          class="absolute top-0 right-0 mr-2 mb-2 bg-white !rounded-full"
           :product="product"
         />
       </slot>
     </div>
     <div class="p-2 border-t border-neutral-200 typography-text-sm flex flex-col flex-auto">
+      <div class="flex items-center justify-between pt-1 gap-1" :class="{ 'mb-2': !productGetters.getShortDescription(product) }">
+        <SfRating size="xs" :half-increment="true" :value="rating ?? 0" :max="5" />
+        <UiAvailabilityBadge :product="product" :use-availability="true" />
+      </div>
       <SfLink :tag="NuxtLink" :to="productPath" class="no-underline" variant="secondary">
         {{ name }}
       </SfLink>
-      <div class="flex items-center pt-1 gap-1" :class="{ 'mb-2': !productGetters.getShortDescription(product) }">
-        <SfRating size="xs" :half-increment="true" :value="rating ?? 0" :max="5" />
-        <SfCounter size="xs">{{ ratingCount }}</SfCounter>
-      </div>
-      <div
+      <!-- <div
         v-if="productGetters.getShortDescription(product)"
         class="block py-2 font-normal typography-text-xs text-neutral-700 text-justify whitespace-pre-line break-words"
       >
         <span class="line-clamp-3">
           {{ productGetters.getShortDescription(product) }}
         </span>
-      </div>
+      </div> -->
       <LowestPrice :product="product" />
       <div v-if="showBasePrice" class="mb-2">
         <BasePriceInLine :base-price="basePrice" :unit-content="unitContent" :unit-name="unitName" />
@@ -96,6 +96,7 @@
 import { productGetters } from '@plentymarkets/shop-api';
 import { SfLink, SfIconShoppingCart, SfLoaderCircular, SfRating, SfCounter } from '@storefront-ui/vue';
 import type { ProductCardProps } from '~/components/ui/ProductCard/types';
+import UiAvailabilityBadge from '~/components/ui/AvailabilityBadge/AvailabilityBadge.vue';
 import { defaults } from '~/composables';
 
 const localePath = useLocalePath();
@@ -109,7 +110,7 @@ const {
   imageWidth,
   imageHeight,
   rating,
-  ratingCount,
+  // ratingCount,
   priority,
   lazy = true,
   unitContent,
