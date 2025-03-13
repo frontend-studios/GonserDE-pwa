@@ -1,13 +1,14 @@
 <template>
   <form
-    class="md:border md:border-neutral-100 md:shadow-lg md:rounded-md md:sticky md:top-40"
+    class="md:border md:border-neutral-100 md:shadow-lg md:rounded-md md:top-40"
     data-testid="purchase-card"
     @submit.prevent="handleAddToCart()"
   >
     <div class="relative">
       <div class="drift-zoom-image">
         <section class="p-4 xl:p-6">
-          <div class="grid grid-cols-[2fr_1fr] mt-4">
+          <!-- <div class="grid grid-cols-[2fr_1fr] mt-4"> -->
+            <div class="flex justify-between mt-4">
             <h1 class="font-bold typography-headline-4" data-testid="product-name">
               {{ productGetters.getName(product) }}
             </h1>
@@ -21,13 +22,13 @@
                     viewport.isLessThan('lg'),
                 }"
               >
-                <template v-if="viewport.isGreaterOrEquals('lg')">
+                <!-- <template v-if="viewport.isGreaterOrEquals('lg')">
                   {{
                     !isWishlistItem(productGetters.getVariationId(product))
                       ? t('addToWishlist')
                       : t('removeFromWishlist')
                   }}
-                </template>
+                </template> -->
               </WishlistButton>
             </div>
           </div>
@@ -50,7 +51,7 @@
           <div class="mt-2 variation-properties">
             <VariationProperties :product="product" />
           </div>
-          <div class="inline-flex items-center mt-4 mb-2">
+          <!-- <div class="inline-flex items-center mt-4 mb-2">
             <SfRating
               size="xs"
               :half-increment="true"
@@ -66,7 +67,7 @@
             >
               {{ t('showAllReviews') }}
             </UiButton>
-          </div>
+          </div> -->
           <div
             v-if="productGetters.getShortDescription(product).length > 0"
             class="mb-4 font-normal typography-text-sm whitespace-pre-line break-words"
@@ -102,9 +103,9 @@
                   :disabled="loading || !productGetters.isSalable(product)"
                 >
                   <template #prefix>
-                    <div v-if="!loading" class="flex row items-center">
-                      <SfIconShoppingCart size="sm" />
-                      {{ t('addToCart') }}
+                    <div v-if="!loading" class="flex justify-center items-center w-full">
+                      <span class="mr-auto">{{ t('addToCart') }}</span>
+                      <SfIconShoppingCart size="sm" class="ml-auto" />
                     </div>
                     <div v-else>
                       <SfLoaderCircular size="sm" />
