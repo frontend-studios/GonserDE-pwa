@@ -1,6 +1,6 @@
 <template>
   <div class="border border-neutral-200 rounded-md hover:shadow-lg flex flex-col" data-testid="product-card">
-    <div class="relative overflow-hidden">
+    <div class="relative overflow-hidden cardlink">
       <UiBadges
         :class="['absolute', isFromWishlist ? 'mx-2' : 'm-2']"
         :product="product"
@@ -32,12 +32,13 @@
       <slot name="wishlistButton">
         <WishlistButton
           square
-          class="absolute top-0 right-0 mr-2 mb-2 bg-white !rounded-full"
+          class="absolute top-0 right-0 mr-2 mb-2 bg-white !rounded-full wishlist-button"
           :product="product"
+          :class="{ 'visible': isWishlistItem(variationId) }"
         />
       </slot>
     </div>
-    <div class="p-2 border-t border-neutral-200 typography-text-sm flex flex-col flex-auto">
+    <div class="p-2 bg-gray-100 border-t border-neutral-200 typography-text-sm flex flex-col flex-auto">
       <div class="flex items-center justify-between pt-1 gap-1" :class="{ 'mb-2': !productGetters.getShortDescription(product) }">
         <SfRating size="xs" :half-increment="true" :value="rating ?? 0" :max="5" />
         <UiAvailabilityBadge :product="product" :use-availability="true" />
@@ -62,7 +63,7 @@
           <span v-if="crossedPrice" class="typography-text-sm text-neutral-500 line-through">
             {{ n(crossedPrice, 'currency') }}
           </span>
-          <span class="block pb-2 font-bold typography-text-sm" data-testid="product-card-vertical-price">
+          <span class="block pb-2 font-bold typography-text-xl" data-testid="product-card-vertical-price">
             <span v-if="!productGetters.canBeAddedToCartFromCategoryPage(product)" class="mr-1">
               {{ t('account.ordersAndReturns.orderDetails.priceFrom') }}
             </span>
@@ -135,6 +136,8 @@ const loading = ref(false);
 
 const path = computed(() => productGetters.getCategoryUrlPath(product, categoryTree.value));
 const productSlug = computed(() => productGetters.getSlug(product) + `_${productGetters.getItemId(product)}`);
+const { isWishlistItem } = useWishlist();
+const variationId = computed(() => productGetters.getVariationId(product));
 const productPath = computed(() => localePath(`${path.value}/${productSlug.value}`));
 const getWidth = () => {
   if (imageWidth && imageWidth > 0 && imageUrl.includes(defaults.IMAGE_LINK_SUFIX)) {
@@ -169,3 +172,17 @@ const addWithLoader = async (productId: number, quickCheckout = true) => {
 
 const NuxtLink = resolveComponent('NuxtLink');
 </script>
+<style scoped>
+.wishlist-button {
+  visibility: hidden;
+  transition: visibility 0.3s;
+}
+
+.wishlist-button.visible {
+  visibility: visible;
+}
+
+.cardlink:hover .wishlist-button {
+  visibility: visible;
+}
+</style>
