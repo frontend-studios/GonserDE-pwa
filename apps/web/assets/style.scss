@@ -1,5 +1,11 @@
 @import '_variables';
 @import '_custom-overrides';
+@font-face {
+  font-family: 'Open Sans';
+  src: url('/apps/web/assets/fonts/OpenSans-VariableFont_wdth\,wght.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
 
 :root {
   --colors-2-primary-50: #{$color-2-primary-50};
@@ -27,6 +33,7 @@
 
 body {
   color: $default-text-color;
+  font-family: 'Open Sans', helvetica, Arial, sans-serif !important;
 }
 
 .scrollbar-hidden {

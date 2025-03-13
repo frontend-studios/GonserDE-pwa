@@ -42,7 +42,7 @@
         <SfRating size="xs" :half-increment="true" :value="rating ?? 0" :max="5" />
         <UiAvailabilityBadge :product="product" :use-availability="true" />
       </div>
-      <SfLink :tag="NuxtLink" :to="productPath" class="no-underline" variant="secondary">
+      <SfLink :tag="NuxtLink" :to="productPath" class="no-underline font-bold" variant="secondary">
         {{ name }}
       </SfLink>
       <!-- <div
@@ -57,37 +57,42 @@
       <div v-if="showBasePrice" class="mb-2">
         <BasePriceInLine :base-price="basePrice" :unit-content="unitContent" :unit-name="unitName" />
       </div>
-      <div class="flex flex-col-reverse items-start md:flex-row md:items-center mt-auto">
-        <span class="block pb-2 font-bold typography-text-sm" data-testid="product-card-vertical-price">
-          <span v-if="!productGetters.canBeAddedToCartFromCategoryPage(product)" class="mr-1">
-            {{ t('account.ordersAndReturns.orderDetails.priceFrom') }}
+      <div class="flex flex-col md:flex-row md:items-center mt-auto">
+        <div class="flex flex-col">
+          <span v-if="crossedPrice" class="typography-text-sm text-neutral-500 line-through">
+            {{ n(crossedPrice, 'currency') }}
           </span>
-          <span>{{ n(price, 'currency') }}</span>
-          <span>{{ t('asterisk') }} </span>
-        </span>
-        <span v-if="crossedPrice" class="typography-text-sm text-neutral-500 line-through md:ml-3 md:pb-2">
-          {{ n(crossedPrice, 'currency') }}
-        </span>
+          <span class="block pb-2 font-bold typography-text-sm" data-testid="product-card-vertical-price">
+            <span v-if="!productGetters.canBeAddedToCartFromCategoryPage(product)" class="mr-1">
+              {{ t('account.ordersAndReturns.orderDetails.priceFrom') }}
+            </span>
+            <span>{{ n(price, 'currency') }}</span>
+            <span>{{ t('asterisk') }} </span>
+          </span>
+        </div>
+        <div class="flex md:ml-auto">
+          <UiButton
+            v-if="productGetters.canBeAddedToCartFromCategoryPage(product)"
+            size="sm"
+            class="min-w-[50px] w-fit"
+            data-testid="add-to-basket-short"
+            :disabled="loading"
+            @click="addWithLoader(Number(productGetters.getId(product)))"
+          >
+            <template v-if="!loading" #prefix>
+              <SfIconShoppingCart size="sm" />
+            </template>
+            <SfLoaderCircular v-if="loading" class="flex justify-center items-center" size="sm" />
+            <!-- <span v-else>
+              {{ t('addToCartShort') }}
+            </span> -->
+          </UiButton>
+          <UiButton v-else type="button" :tag="NuxtLink" :to="productPath" size="sm" class="w-fit">
+            <span>{{ t('showOptions') }}</span>
+          </UiButton>
+        </div>
       </div>
-      <UiButton
-        v-if="productGetters.canBeAddedToCartFromCategoryPage(product)"
-        size="sm"
-        class="min-w-[80px] w-fit"
-        data-testid="add-to-basket-short"
-        :disabled="loading"
-        @click="addWithLoader(Number(productGetters.getId(product)))"
-      >
-        <template v-if="!loading" #prefix>
-          <SfIconShoppingCart size="sm" />
-        </template>
-        <SfLoaderCircular v-if="loading" class="flex justify-center items-center" size="sm" />
-        <span v-else>
-          {{ t('addToCartShort') }}
-        </span>
-      </UiButton>
-      <UiButton v-else type="button" :tag="NuxtLink" :to="productPath" size="sm" class="w-fit">
-        <span>{{ t('showOptions') }}</span>
-      </UiButton>
+
     </div>
   </div>
 </template>
