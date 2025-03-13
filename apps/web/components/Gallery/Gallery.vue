@@ -75,26 +75,26 @@
     <transition name="fade-overlay">
       <div
         v-if="lightboxOpen"
-        class="fixed inset-0 bg-white flex flex-col items-center justify-center z-50"
+        class="fixed inset-0 bg-gray-100 flex flex-col items-center justify-center z-50"
         @click="closeLightbox"
         @touchstart="handleTouchStart"
         @touchmove="handleTouchMove"
         @touchend="handleTouchEnd"
       >
-        <div class="relative max-w-3xl" @click.stop>
-          <button class="absolute top-2 right-2 text-primary-500" @click="closeLightbox">
+        <div class=" max-w-3xl" @click.stop>
+          <button class="absolute top-2 right-2" @click="closeLightbox">
             <SfIconClose size="xl" />
           </button>
           <button
             v-if="lightboxIndex > 0"
-            class="absolute left-2 top-1/2 transform -translate-y-1/2 text-primary-500"
+            class="absolute left-2 top-1/2 transform -translate-y-1/2"
             @click="prevImage"
           >
             <SfIconChevronLeft size="2xl" />
           </button>
           <button
             v-if="lightboxIndex < images.length - 1"
-            class="absolute right-2 top-1/2 transform -translate-y-1/2 text-primary-500"
+            class="absolute right-2 top-1/2 transform -translate-y-1/2"
             @click="nextImage"
           >
             <SfIconChevronRight size="2xl" />
@@ -165,21 +165,34 @@ const nextImage = () => {
 // Swipe functionality
 let touchStartX = 0;
 let touchEndX = 0;
+const swipeThreshold = 50; // Minimum swipe distance in pixels
+let isTouching = false; 
 
 const handleTouchStart = (event: TouchEvent) => {
   touchStartX = event.changedTouches[0].screenX;
+  touchEndX = touchStartX; 
+  isTouching = true; 
 };
 
 const handleTouchMove = (event: TouchEvent) => {
-  touchEndX = event.changedTouches[0].screenX;
+  if (isTouching) {
+    touchEndX = event.changedTouches[0].screenX;
+  }
 };
 
 const handleTouchEnd = () => {
-  if (touchEndX < touchStartX) {
-    nextImage();
-  }
-  if (touchEndX > touchStartX) {
-    prevImage();
+  if (isTouching) {
+    const swipeDistance = touchEndX - touchStartX;
+
+    if (Math.abs(swipeDistance) > swipeThreshold) {
+      if (swipeDistance < 0) {
+        nextImage();
+      } else {
+        prevImage();
+      }
+    }
+    isTouching = false;
+    touchEndX = 0;
   }
 };
 
