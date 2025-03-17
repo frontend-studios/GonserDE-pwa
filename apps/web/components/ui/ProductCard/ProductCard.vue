@@ -1,6 +1,6 @@
 <template>
-  <div class="border border-neutral-200 rounded-md hover:shadow-lg flex flex-col" data-testid="product-card">
-    <div class="relative overflow-hidden cardlink">
+  <div class="border border-neutral-200 rounded-md hover:shadow-lg flex flex-col cardlink" data-testid="product-card">
+    <div class="relative overflow-hidden">
       <UiBadges
         :class="['absolute', isFromWishlist ? 'mx-2' : 'm-2']"
         :product="product"
@@ -175,7 +175,7 @@ const NuxtLink = resolveComponent('NuxtLink');
 <style scoped>
 .wishlist-button {
   visibility: hidden;
-  transition: visibility 0.3s;
+  transition: visibility 0.1s;
 }
 
 .wishlist-button.visible {

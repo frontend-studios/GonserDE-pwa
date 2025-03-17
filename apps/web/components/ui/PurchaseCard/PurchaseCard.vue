@@ -8,8 +8,8 @@
       <div class="drift-zoom-image">
         <section class="p-4 xl:p-6">
           <!-- <div class="grid grid-cols-[2fr_1fr] mt-4"> -->
-            <div class="flex justify-between mt-4">
-            <h1 class="font-bold typography-headline-4" data-testid="product-name">
+          <div class="flex justify-between">
+            <h1 class="flex items-center justify-center font-bold typography-headline-4" data-testid="product-name">
               {{ productGetters.getName(product) }}
             </h1>
             <div class="flex items-center justify-center">
@@ -32,26 +32,7 @@
               </WishlistButton>
             </div>
           </div>
-          <div class="flex space-x-2">
-            <Price :price="priceWithProperties" :crossed-price="crossedPrice" />
-            <div v-if="(productBundleGetters?.getBundleDiscount(product) ?? 0) > 0" class="m-auto">
-              <UiTag :size="'sm'" :variant="'secondary'">{{
-                t('procentageSavings', { percent: productBundleGetters.getBundleDiscount(product) })
-              }}</UiTag>
-            </div>
-          </div>
-          <LowestPrice :product="product" />
-          <BasePrice
-            v-if="productGetters.showPricePerUnit(product)"
-            :base-price="basePriceSingleValue"
-            :unit-content="productGetters.getUnitContent(product)"
-            :unit-name="productGetters.getUnitName(product)"
-          />
-          <UiBadges class="mt-4" :product="product" :use-availability="true" />
-          <div class="mt-2 variation-properties">
-            <VariationProperties :product="product" />
-          </div>
-          <!-- <div class="inline-flex items-center mt-4 mb-2">
+          <!-- <div class="inline-flex items-center mb-2">
             <SfRating
               size="xs"
               :half-increment="true"
@@ -68,6 +49,40 @@
               {{ t('showAllReviews') }}
             </UiButton>
           </div> -->
+          <div class="flex space-x-2">
+            <Price :price="priceWithProperties" :crossed-price="crossedPrice" />
+            <div v-if="(productBundleGetters?.getBundleDiscount(product) ?? 0) > 0" class="m-auto">
+              <UiTag :size="'sm'" :variant="'secondary'">{{
+                t('procentageSavings', { percent: productBundleGetters.getBundleDiscount(product) })
+              }}</UiTag>
+            </div>
+          </div>
+          <LowestPrice :product="product" />
+          <BasePrice
+            v-if="productGetters.showPricePerUnit(product)"
+            :base-price="basePriceSingleValue"
+            :unit-content="productGetters.getUnitContent(product)"
+            :unit-name="productGetters.getUnitName(product)"
+          />
+
+          <div class="mt-4 typography-text-xs flex gap-1">
+            <span>{{ t('asterisk') }}</span>
+            <span>{{ showNetPrices ? t('itemExclVAT') : t('itemInclVAT') }}</span>
+            <i18n-t keypath="excludedShipping" scope="global">
+              <template #shipping>
+                <SfLink
+                  :href="localePath(paths.shipping)"
+                  target="_blank"
+                  class="focus:outline focus:outline-offset-2 focus:outline-2 outline-secondary-600 rounded"
+                >
+                  {{ $t('delivery') }}
+                </SfLink>
+              </template>
+            </i18n-t>
+          </div>
+          <div class="mt-2 variation-properties">
+            <VariationProperties :product="product" />
+          </div>
           <div
             v-if="productGetters.getShortDescription(product).length > 0"
             class="mb-4 font-normal typography-text-sm whitespace-pre-line break-words"
@@ -76,7 +91,6 @@
             {{ productGetters.getShortDescription(product) }}
           </div>
 
-          <ProductAttributes :product="product" />
           <BundleOrderItems v-if="product.bundleComponents" :product="product" />
           <OrderProperties :product="product" />
           <GraduatedPriceList :product="product" :count="quantitySelectorValue" />
@@ -115,26 +129,16 @@
               </SfTooltip>
             </div>
 
-            <div class="mt-4 typography-text-xs flex gap-1">
-              <span>{{ t('asterisk') }}</span>
-              <span>{{ showNetPrices ? t('itemExclVAT') : t('itemInclVAT') }}</span>
-              <i18n-t keypath="excludedShipping" scope="global">
-                <template #shipping>
-                  <SfLink
-                    :href="localePath(paths.shipping)"
-                    target="_blank"
-                    class="focus:outline focus:outline-offset-2 focus:outline-2 outline-secondary-600 rounded"
-                  >
-                    {{ $t('delivery') }}
-                  </SfLink>
-                </template>
-              </i18n-t>
-            </div>
             <template v-if="showPayPalButtons">
               <PayPalExpressButton type="SingleItem" class="mt-4" @validation-callback="paypalHandleAddToCart" />
               <PayPalPayLaterBanner placement="product" :amount="priceWithProperties * quantitySelectorValue" />
             </template>
           </div>
+          <UiBadges class="mt-4" :product="product" :use-availability="true" />
+
+        </section>
+        <section class="p-4 xl:p-6">
+          <ProductAttributes :product="product" />
         </section>
       </div>
     </div>
