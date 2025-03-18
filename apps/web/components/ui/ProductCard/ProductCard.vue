@@ -11,7 +11,7 @@
         :tag="NuxtLink"
         rel="preload"
         :to="productPath"
-        :class="{ 'size-48': isFromSlider }"
+        :class="{ 'size-56': isFromSlider }"
         as="image"
         class="flex items-center justify-center"
       >

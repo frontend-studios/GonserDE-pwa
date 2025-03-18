@@ -27,7 +27,7 @@
       :rating-count="productGetters.getTotalReviews(product)"
       :rating="productGetters.getAverageRating(product, 'half')"
       is-from-slider
-      class="max-w-48"
+      class="min-w-56"
     />
   </SfScrollable>
   <!-- <div class="mt-4 typography-text-xs flex gap-1">

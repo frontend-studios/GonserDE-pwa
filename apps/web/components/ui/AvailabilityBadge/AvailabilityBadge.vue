@@ -1,14 +1,10 @@
 <template>
   <div v-if="availabilityEnabled" class="flex items-center relative">
-    <span
-      :class="[
-        'w-3 h-3 rounded-full mr-2 cursor-pointer',
-        availabilityColor
-      ]"
-      @mouseover="showAvailabilityName"
-      @mouseleave="hideAvailabilityName"
-      @click="showAvailabilityNameForTwoSeconds"
-    />
+    <SfIconCheckCircle v-if="availability === 'availability-1'" size="xs" class="text-green-500 cursor-pointer" @mouseover="showAvailabilityName" @mouseleave="hideAvailabilityName" @click="showAvailabilityNameForTwoSeconds" />
+    <span v-else-if="availability === 'availability-2'" class="bg-green-500 w-3 h-3 rounded-full mr-2 cursor-pointer" @mouseover="showAvailabilityName" @mouseleave="hideAvailabilityName" @click="showAvailabilityNameForTwoSeconds"/>
+    <SfIconCheckCircle v-if="availability === 'availability-3'" size="xs" class="text-yellow-500 cursor-pointer" @mouseover="showAvailabilityName" @mouseleave="hideAvailabilityName" @click="showAvailabilityNameForTwoSeconds" />
+    <span v-else-if="['availability-4', 'availability-5', 'availability-6'].includes(availability)" class="bg-yellow-500 w-3 h-3 rounded-full mr-2 cursor-pointer" @mouseover="showAvailabilityName" @mouseleave="hideAvailabilityName" @click="showAvailabilityNameForTwoSeconds"/>
+    <SfIconCancel v-if="availability === 'availability-7'" size="xs" class="text-red-500 cursor-pointer" @mouseover="showAvailabilityName" @mouseleave="hideAvailabilityName" @click="showAvailabilityNameForTwoSeconds" />
     <transition name="fade">
       <span v-if="isAvailabilityNameVisible" class="absolute left-0 top-6 bg-white p-1 rounded shadow">
         {{ availabilityName }}
@@ -20,8 +16,8 @@
 <script setup lang="ts">
 import { productGetters } from '@plentymarkets/shop-api';
 import { defineProps, ref, computed } from 'vue';
+import { SfIconCheckCircle, SfIconCancel } from '@storefront-ui/vue';
 import type { AvailabilityBadgeProps } from './types';
-
 const { product, useAvailability = false } = defineProps<AvailabilityBadgeProps>();
 
 const availabilityEnabled = useAvailability;
@@ -36,16 +32,21 @@ if (availabilityEnabled) {
   };
 }
 
-const availabilityColor = computed(() => {
-  const availability = productGetters.getAgenciesAvailabilityCLass(product);
-  if (availability === 'availability-1') {
-    return 'bg-green-500';
-  } else if (availability === 'availability-2') {
-    return 'bg-yellow-500';
-  } else {
-    return 'bg-red-500';
-  }
-});
+const availability = computed(() => productGetters.getAgenciesAvailabilityCLass(product));
+
+// const availabilityColor = computed(() => {
+//   if (availability.value === 'availability-1' || availability.value === 'availability-2') {
+//     return 'bg-green-500';
+//   } else if (availability.value === 'availability-3' || ['availability-4', 'availability-5', 'availability-6'].includes(availability.value)) {
+//     return 'bg-yellow-500';
+//   } else {
+//     return 'bg-red-500';
+//   }
+// });
+
+// const showIcon = computed(() => {
+//   return ['availability-1', 'availability-3', 'availability-7'].includes(availability.value);
+// });
 
 const showAvailabilityName = () => {
   isAvailabilityNameVisible.value = true;
@@ -72,6 +73,9 @@ const showAvailabilityNameForTwoSeconds = () => {
 }
 .bg-red-500 {
   background-color: #f56565;
+}
+.bg-transparent {
+  background-color: transparent;
 }
 .fade-enter-active, .fade-leave-active {
   transition: opacity 0.5s;
