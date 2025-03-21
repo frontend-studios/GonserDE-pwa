@@ -1,5 +1,5 @@
 <template>
-  <div class="border border-neutral-200 rounded-md hover:shadow-lg flex flex-col" data-testid="product-card">
+  <div class="border border-neutral-200 rounded-md hover:shadow-lg flex flex-col cardlink" data-testid="product-card">
     <div class="relative overflow-hidden">
       <UiBadges
         :class="['absolute', isFromWishlist ? 'mx-2' : 'm-2']"
@@ -11,7 +11,7 @@
         :tag="NuxtLink"
         rel="preload"
         :to="productPath"
-        :class="{ 'size-48': isFromSlider }"
+        :class="{ 'size-56': isFromSlider }"
         as="image"
         class="flex items-center justify-center"
       >
@@ -32,62 +32,68 @@
       <slot name="wishlistButton">
         <WishlistButton
           square
-          class="absolute bottom-0 right-0 mr-2 mb-2 bg-white ring-1 ring-inset ring-neutral-200 !rounded-full"
+          class="absolute top-0 right-0 mr-2 mb-2 bg-white !rounded-full wishlist-button"
           :product="product"
+          :class="{ 'visible': isWishlistItem(variationId) }"
         />
       </slot>
     </div>
-    <div class="p-2 border-t border-neutral-200 typography-text-sm flex flex-col flex-auto">
-      <SfLink :tag="NuxtLink" :to="productPath" class="no-underline" variant="secondary" data-testid="productcard-name">
+    <div class="p-2 bg-gray-100 border-t border-neutral-200 typography-text-sm flex flex-col flex-auto">
+      <div class="flex items-center justify-between pt-1 gap-1" :class="{ 'mb-2': !productGetters.getShortDescription(product) }">
+        <SfRating size="xs" :half-increment="true" :value="rating ?? 0" :max="5" />
+        <UiAvailabilityBadge :product="product" :use-availability="true" />
+      </div>
+      <SfLink :tag="NuxtLink" :to="productPath" class="no-underline font-bold" variant="secondary">
         {{ name }}
       </SfLink>
-      <div class="flex items-center pt-1 gap-1" :class="{ 'mb-2': !productGetters.getShortDescription(product) }">
-        <SfRating size="xs" :half-increment="true" :value="rating ?? 0" :max="5" />
-        <SfCounter size="xs">{{ ratingCount }}</SfCounter>
-      </div>
-      <div
+      <!-- <div
         v-if="productGetters.getShortDescription(product)"
         class="block py-2 font-normal typography-text-xs text-neutral-700 text-justify whitespace-pre-line break-words"
       >
         <span class="line-clamp-3">
           {{ productGetters.getShortDescription(product) }}
         </span>
-      </div>
+      </div> -->
       <LowestPrice :product="product" />
       <div v-if="showBasePrice" class="mb-2">
         <BasePriceInLine :base-price="basePrice" :unit-content="unitContent" :unit-name="unitName" />
       </div>
-      <div class="flex flex-col-reverse items-start md:flex-row md:items-center mt-auto">
-        <span class="block pb-2 font-bold typography-text-sm" data-testid="product-card-vertical-price">
-          <span v-if="!productGetters.canBeAddedToCartFromCategoryPage(product)" class="mr-1">
-            {{ t('account.ordersAndReturns.orderDetails.priceFrom') }}
+      <div class="flex flex-col md:flex-row md:items-center mt-auto">
+        <div class="flex flex-col">
+          <span v-if="crossedPrice" class="typography-text-sm text-neutral-500 line-through">
+            {{ n(crossedPrice, 'currency') }}
           </span>
-          <span>{{ n(price, 'currency') }}</span>
-          <span>{{ t('asterisk') }} </span>
-        </span>
-        <span v-if="crossedPrice" class="typography-text-sm text-neutral-500 line-through md:ml-3 md:pb-2">
-          {{ n(crossedPrice, 'currency') }}
-        </span>
+          <span class="block pb-2 font-bold typography-text-xl" data-testid="product-card-vertical-price">
+            <span v-if="!productGetters.canBeAddedToCartFromCategoryPage(product)" class="mr-1">
+              {{ t('account.ordersAndReturns.orderDetails.priceFrom') }}
+            </span>
+            <span>{{ n(price, 'currency') }}</span>
+            <span>{{ t('asterisk') }} </span>
+          </span>
+        </div>
+        <div class="flex md:ml-auto">
+          <UiButton
+            v-if="productGetters.canBeAddedToCartFromCategoryPage(product)"
+            size="sm"
+            class="min-w-[50px] w-fit"
+            data-testid="add-to-basket-short"
+            :disabled="loading"
+            @click="addWithLoader(Number(productGetters.getId(product)))"
+          >
+            <template v-if="!loading" #prefix>
+              <SfIconShoppingCart size="sm" />
+            </template>
+            <SfLoaderCircular v-if="loading" class="flex justify-center items-center" size="sm" />
+            <!-- <span v-else>
+              {{ t('addToCartShort') }}
+            </span> -->
+          </UiButton>
+          <UiButton v-else type="button" :tag="NuxtLink" :to="productPath" size="sm" class="w-fit">
+            <span>{{ t('showOptions') }}</span>
+          </UiButton>
+        </div>
       </div>
-      <UiButton
-        v-if="productGetters.canBeAddedToCartFromCategoryPage(product)"
-        size="sm"
-        class="min-w-[80px] w-fit"
-        data-testid="add-to-basket-short"
-        :disabled="loading"
-        @click="addWithLoader(Number(productGetters.getId(product)))"
-      >
-        <template v-if="!loading" #prefix>
-          <SfIconShoppingCart size="sm" />
-        </template>
-        <SfLoaderCircular v-if="loading" class="flex justify-center items-center" size="sm" />
-        <span v-else>
-          {{ t('addToCartShort') }}
-        </span>
-      </UiButton>
-      <UiButton v-else type="button" :tag="NuxtLink" :to="productPath" size="sm" class="w-fit">
-        <span>{{ t('showOptions') }}</span>
-      </UiButton>
+
     </div>
   </div>
 </template>
@@ -96,6 +102,7 @@
 import { productGetters } from '@plentymarkets/shop-api';
 import { SfLink, SfIconShoppingCart, SfLoaderCircular, SfRating, SfCounter } from '@storefront-ui/vue';
 import type { ProductCardProps } from '~/components/ui/ProductCard/types';
+import UiAvailabilityBadge from '~/components/ui/AvailabilityBadge/AvailabilityBadge.vue';
 import { defaults } from '~/composables';
 
 const localePath = useLocalePath();
@@ -109,7 +116,7 @@ const {
   imageWidth,
   imageHeight,
   rating,
-  ratingCount,
+  // ratingCount,
   priority,
   lazy = true,
   unitContent,
@@ -129,6 +136,8 @@ const loading = ref(false);
 
 const path = computed(() => productGetters.getCategoryUrlPath(product, categoryTree.value));
 const productSlug = computed(() => productGetters.getSlug(product) + `_${productGetters.getItemId(product)}`);
+const { isWishlistItem } = useWishlist();
+const variationId = computed(() => productGetters.getVariationId(product));
 const productPath = computed(() => localePath(`${path.value}/${productSlug.value}`));
 const getWidth = () => {
   if (imageWidth && imageWidth > 0 && imageUrl.includes(defaults.IMAGE_LINK_SUFIX)) {
@@ -163,3 +172,17 @@ const addWithLoader = async (productId: number, quickCheckout = true) => {
 
 const NuxtLink = resolveComponent('NuxtLink');
 </script>
+<style scoped>
+.wishlist-button {
+  visibility: hidden;
+  transition: visibility 0.1s;
+}
+
+.wishlist-button.visible {
+  visibility: visible;
+}
+
+.cardlink:hover .wishlist-button {
+  visibility: visible;
+}
+</style>

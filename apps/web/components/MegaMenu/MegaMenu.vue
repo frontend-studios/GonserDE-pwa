@@ -1,20 +1,20 @@
 <template>
   <header ref="referenceRef" :class="headerClass" class="relative w-full md:sticky md:shadow-md z-10">
     <div
-      class="flex justify-between items-center flex-wrap md:flex-nowrap px-4 md:px-10 py-2 md:py-5 w-full border-0 bg-primary-500 border-neutral-200"
+      class="flex justify-between items-center flex-wrap md:flex-nowrap px-4 md:px-10 py-2 md:py-5 w-full border-0 border-neutral-200"
       data-testid="navbar-top"
     >
       <div class="flex items-center">
-        <UiButton
+        <!-- <UiButton
           v-if="viewport.isLessThan('lg')"
           variant="tertiary"
           square
           :aria-label="t('closeMenu')"
-          class="mr-5 bg-transparent hover:bg-primary-800 hover:text-white active:bg-primary-700 active:text-white"
+          class="mr-5 bg-transparent hover:bg-primary-800 hover:text-white active:bg-primary-700 active:text-primary-500"
           @click="openMenu([])"
         >
-          <SfIconMenu class="text-white" />
-        </UiButton>
+          <SfIconMenu />
+        </UiButton> -->
 
         <NuxtLink
           :to="localePath(paths.home)"
@@ -25,17 +25,17 @@
         </NuxtLink>
       </div>
 
-      <slot />
+      <slot v-bind="{ openMenu }" />
     </div>
 
     <div v-if="viewport.isGreaterOrEquals('lg')">
       <nav ref="floatingRef">
         <ul
-          class="flex flex-wrap px-6 py-2 bg-white border-b border-b-neutral-200 border-b-solid"
+          class="flex px-6 py-2 bg-white border-b-2 border-b-primary-500 border-b-solid"
           @blur="
-            (event) => {
+            (event: FocusEvent) => {
               if (!(event.currentTarget as Element).contains(event.relatedTarget as Element)) {
-                close();
+              close();
               }
             }
           "
@@ -53,10 +53,10 @@
                 @click="menuNode.childCount > 0 ? openMenu([menuNode.id]) : openMenu([])"
               >
                 <span>{{ categoryTreeGetters.getName(menuNode) }}</span>
-                <SfIconChevronRight
+                <!-- <SfIconChevronRight
                   v-if="menuNode.childCount > 0"
                   class="rotate-90 text-neutral-500 group-hover:text-neutral-700 group-active:text-neutral-900"
-                />
+                /> -->
               </UiButton>
             </NuxtLink>
 
@@ -83,7 +83,7 @@
                       :tag="NuxtLink"
                       size="sm"
                       :href="localePath(generateCategoryLink(node))"
-                      class="typography-text-sm mb-2"
+                      class="typography-text-base font-medium text-primary-500 whitespace-nowrap px-4 py-1"
                     >
                       {{ categoryTreeGetters.getName(node) }}
                     </SfListItem>
@@ -94,7 +94,7 @@
                     :tag="NuxtLink"
                     size="sm"
                     :href="localePath(generateCategoryLink(node))"
-                    class="typography-text-base font-medium text-neutral-900 whitespace-nowrap px-4 py-1.5 border-b border-b-neutral-200 border-b-solid"
+                    class="typography-text-base font-medium text-primary-500 whitespace-nowrap px-4 py-1"
                   >
                     {{ categoryTreeGetters.getName(node) }}
                   </SfListItem>
@@ -105,7 +105,7 @@
                         :tag="NuxtLink"
                         size="sm"
                         :href="localePath(generateCategoryLink(child))"
-                        class="typography-text-sm py-1.5"
+                        class="typography-text-sm py-0.5"
                       >
                         {{ categoryTreeGetters.getName(child) }}
                       </SfListItem>
@@ -124,8 +124,8 @@
       <SfDrawer
         ref="drawerReference"
         v-model="isOpen"
-        placement="left"
-        class="right-12 max-w-96 bg-white overflow-y-auto z-[1000]"
+        placement="right"
+        class="left-12 max-w-96 bg-white overflow-y-auto z-[1000]"
       >
         <nav>
           <div class="flex items-center justify-between p-4 border-b border-b-neutral-200 border-b-solid">
@@ -190,7 +190,7 @@ import {
   SfIconChevronRight,
   SfCounter,
   SfIconArrowBack,
-  SfIconMenu,
+  // SfIconMenu,
   useTrapFocus,
   useDropdown,
 } from '@storefront-ui/vue';

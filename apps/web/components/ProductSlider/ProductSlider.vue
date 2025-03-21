@@ -27,10 +27,10 @@
       :rating-count="productGetters.getTotalReviews(product)"
       :rating="productGetters.getAverageRating(product, 'half')"
       is-from-slider
-      class="max-w-48"
+      class="min-w-56"
     />
   </SfScrollable>
-  <div class="mt-4 typography-text-xs flex gap-1">
+  <!-- <div class="mt-4 typography-text-xs flex gap-1">
     <span>{{ $t('asterisk') }}</span>
     <span v-if="showNetPrices">{{ $t('itemExclVAT') }}</span>
     <span v-else>{{ $t('itemInclVAT') }}</span>
@@ -45,7 +45,7 @@
         </SfLink>
       </template>
     </i18n-t>
-  </div>
+  </div> -->
 </template>
 
 <script setup lang="ts">
