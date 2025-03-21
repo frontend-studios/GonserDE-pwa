@@ -117,7 +117,7 @@
             </template>
           </UiButton>
 
-          <UiButton
+          <!-- <UiButton
             v-if="showConfigurationDrawer"
             class="group relative hover:text-white active:text-white hover:bg-primary-500 active:bg-primary-700 mr-1 -ml-0.5 rounded-md"
             variant="tertiary"
@@ -126,7 +126,7 @@
             @click="open = true"
           >
             <SfIconTune />
-          </UiButton>
+          </UiButton> -->
         </nav>
       </template>
 
