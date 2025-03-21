@@ -3,8 +3,8 @@
     <SfIconCheckCircle v-if="availability === 'availability-1'" size="xs" class="text-green-500 cursor-pointer" @mouseover="showAvailabilityName" @mouseleave="hideAvailabilityName" @click="showAvailabilityNameForTwoSeconds" />
     <span v-else-if="availability === 'availability-2'" class="bg-green-500 w-3 h-3 rounded-full mr-2 cursor-pointer" @mouseover="showAvailabilityName" @mouseleave="hideAvailabilityName" @click="showAvailabilityNameForTwoSeconds"/>
     <SfIconCheckCircle v-if="availability === 'availability-3'" size="xs" class="text-yellow-500 cursor-pointer" @mouseover="showAvailabilityName" @mouseleave="hideAvailabilityName" @click="showAvailabilityNameForTwoSeconds" />
-    <span v-else-if="['availability-4', 'availability-5', 'availability-6'].includes(availability)" class="bg-yellow-500 w-3 h-3 rounded-full mr-2 cursor-pointer" @mouseover="showAvailabilityName" @mouseleave="hideAvailabilityName" @click="showAvailabilityNameForTwoSeconds"/>
-    <SfIconCancel v-if="availability === 'availability-7'" size="xs" class="text-red-500 cursor-pointer" @mouseover="showAvailabilityName" @mouseleave="hideAvailabilityName" @click="showAvailabilityNameForTwoSeconds" />
+    <span v-else-if="['availability-4', 'availability-5', 'availability-6', 'availability-7', 'availability-8', 'availability-9'].includes(availability)" class="bg-yellow-500 w-3 h-3 rounded-full mr-2 cursor-pointer" @mouseover="showAvailabilityName" @mouseleave="hideAvailabilityName" @click="showAvailabilityNameForTwoSeconds"/>
+    <SfIconCancel v-if="['availability-10', 'availability-7', 'availability-8', 'availability-9'].includes(availability)" size="xs" class="text-red-500 cursor-pointer" @mouseover="showAvailabilityName" @mouseleave="hideAvailabilityName" @click="showAvailabilityNameForTwoSeconds" />
     <transition name="fade">
       <span v-if="isAvailabilityNameVisible" class="absolute left-0 top-6 bg-white p-1 rounded shadow">
         {{ availabilityName }}
